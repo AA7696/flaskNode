@@ -4,7 +4,7 @@ app = Flask(__name__)
 
 @app.route("/submit", methods=["POST"])
 def submit():
-    data = request.form or request.json  # ✅ Accept both
+    data = request.form or request.json 
     name = data.get("name")
     email = data.get("email")
 
