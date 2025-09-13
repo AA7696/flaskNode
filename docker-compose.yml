@@ -1,33 +1,14 @@
-version: "3.9"
+version: "3.8"
 
 services:
   frontend:
     build: ./frontend
-    container_name: express-service
-    restart: always
-    networks:
-      - app-network
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
 
   backend:
     build: ./backend
-    container_name: flask-service
-    restart: always
-    networks:
-      - app-network
-
-  nginx:
-    build: ./nginx
-    container_name: nginx-service
-    restart: always
     ports:
-      - "80:80"
-      - "443:443"
-    depends_on:
-      - frontend
-      - backend
-    networks:
-      - app-network
-
-networks:
-  app-network:
-    driver: bridge
+      - "5000:5000"
