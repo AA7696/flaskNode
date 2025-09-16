@@ -6,17 +6,20 @@ pipeline {
     }
 
     stages {
-        stage('Checkout Code') {
+        stage('Clone Repo') {
             steps {
-                git branch: 'main', url: 'https://github.com/AA7696/flaskNode.git'
+                git branch: 'main', url: 'https://github.com/your-username/flaskNode.git'
             }
         }
 
-        stage('Build & Deploy') {
+        stage('Build and Deploy') {
             steps {
                 sh '''
-                docker-compose down
-                docker-compose up --build -d
+                echo "Stopping existing containers..."
+                ${DOCKER_COMPOSE_PATH} down
+
+                echo "Building and starting containers..."
+                ${DOCKER_COMPOSE_PATH} up --build -d
                 '''
             }
         }
@@ -30,10 +33,10 @@ pipeline {
 
     post {
         success {
-            echo 'Deployment Successful!'
+            echo '✅ Deployment Successful!'
         }
         failure {
-            echo 'Deployment Failed!'
+            echo '❌ Deployment Failed!'
         }
     }
 }
