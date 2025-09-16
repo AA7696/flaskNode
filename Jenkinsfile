@@ -8,7 +8,7 @@ pipeline {
     stages {
         stage('Clone Repo') {
             steps {
-                git branch: 'main', url: 'https://github.com/your-username/flaskNode.git'
+                git branch: 'main', url: 'https://github.com/AA7696/flaskNode.git'
             }
         }
 
